@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import Registro from './views/Registro.vue'
 import Inicio from './views/Inicio.vue'
 import Ingreso from './views/Ingreso.vue'
+import Agregar from './views/Agregar.vue'
+import Editar from './views/Editar.vue'
 
 var firebase = require("firebase/app");
 
@@ -27,6 +29,18 @@ const router = new Router({
       path: '/ingreso',
       name: 'ingreso',
       component: Ingreso
+    },
+    {
+      path: '/agregar',
+      name: 'agregar',
+      component: Agregar,
+      meta: { requiresAuth: true}
+    },
+    {
+      path: '/editar/:id',
+      name: 'editar',
+      component: Editar,
+      meta: { requiresAuth: true}
     }
   ]
 })

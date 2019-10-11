@@ -1,7 +1,12 @@
-import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
-import store from './store'
+import Vue from "vue";
+import App from "./App.vue";
+import router from "./router";
+import store from "./store";
+import BootstrapVue from "bootstrap-vue";
+Vue.use(BootstrapVue);
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
 var firebase = require("firebase/app");
 
 require("firebase/auth");
@@ -19,24 +24,22 @@ const config = {
 };
 // Initialize Firebase
 const firebaseApp = firebase.initializeApp(config);
+firebaseApp.firestore();
+export default firebaseApp.firestore();
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
-firebase.auth().onAuthStateChanged((user)=>{
+firebase.auth().onAuthStateChanged(user => {
   console.log(user);
-  if(user){
-    store.dispatch('detectarUsuario', {email: user.email, uid: user.uid})
-  }else{
-    store.dispatch('detectarUsuario', null)
+  if (user) {
+    store.dispatch("detectarUsuario", { email: user.email, uid: user.uid });
+  } else {
+    store.dispatch("detectarUsuario", null);
   }
 
   new Vue({
     router,
     store,
     render: h => h(App)
-  }).$mount('#app')
-})
-
-
-
-
+  }).$mount("#app");
+});
